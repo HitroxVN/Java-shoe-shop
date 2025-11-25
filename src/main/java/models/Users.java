@@ -1,3 +1,7 @@
+/**
+ * Author: Hoàng Văn Trường
+ * Created on: Nov 21, 2025
+ */
 package models;
 
 public class Users {
@@ -9,7 +13,6 @@ public class Users {
 	private String phone;
 	private String address;
 	private String role;
-
 	
 	public int getId() {
 		return id;
