@@ -52,7 +52,7 @@
 									<th scope="row">${stt.index + 1}</th>
 									<td>${t.id}</td>
 									<td>${t.name}</td>
-									<td class="bg-danger">${t.totalSold}</td>
+									<td >${t.totalSold}</td>
 								</tr>
 							</c:forEach>
 						</tr>
@@ -73,13 +73,13 @@
 					</thead>
 					<tbody>
 						<c:forEach var="t" items="${thuonHieuIt}" varStatus="stt">
-								<tr>
-									<th scope="row">${stt.index + 1}</th>
-									<td>${t.id}</td>
-									<td>${t.name}</td>
-									<td class="bg-danger">${t.totalSold}</td>
-								</tr>
-							</c:forEach>
+							<tr>
+								<th scope="row">${stt.index + 1}</th>
+								<td>${t.id}</td>
+								<td>${t.name}</td>
+								<td class="bg-danger">${t.totalSold}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
