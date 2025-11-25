@@ -86,7 +86,8 @@ public class UserDAO extends DAO {
 			
 			ps.setString(1, user.getFull_name());
 	        ps.setString(2, user.getEmail());
-	        ps.setString(3, user.getPassword());
+	        String hashPassword = sha256(user.getPassword());
+	        ps.setString(3, hashPassword);
 	        ps.setString(4, user.getPhone());
 	        ps.setString(5, user.getAddress());
 	        ps.setString(6, user.getRole());
@@ -137,6 +138,32 @@ public class UserDAO extends DAO {
 		        e.printStackTrace();
 		        return false;
 		    }
+		}
+		
+//		tìm kiếm theo tên, email, sđt
+		public List<Users> search(String keyword){
+			List<Users> list = new ArrayList<>();
+			String query = "SELECT * FROM users WHERE full_name LIKE ? OR email LIKE ? OR phone LIKE ?";
+			
+			try (Connection conn = Dbconnection.getConnection();
+			         PreparedStatement ps = conn.prepareStatement(query)) {
+				
+				String searchKey = "%" + keyword + "%";
+				ps.setString(1, searchKey);
+				ps.setString(2, searchKey);
+				ps.setString(3, searchKey);
+				
+				ResultSet rs = ps.executeQuery();
+				while(rs.next()) {
+					list.add(mapUser(rs));
+				}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			
+			return list;
 		}
 
 	

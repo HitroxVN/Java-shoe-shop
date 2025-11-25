@@ -1,4 +1,4 @@
-package controllers;
+package controllers.auth;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;
@@ -66,6 +66,8 @@ public class LoginController extends HttpServlet {
 		
 		// lưu session và đang nhập
 		HttpSession session = request.getSession();
+		int time = 30*24; // thời gian session (giờ) 30ngayf
+		session.setMaxInactiveInterval(60*60 * time);
 		session.setAttribute("user", user);
 		
 		// forward admin
@@ -73,9 +75,14 @@ public class LoginController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/admin");
 			return;
 		}
+		
+		if(user.getRole().equals("staff")) {
+			response.sendRedirect(request.getContextPath() + "/staff");
+			return;
+		}
 //		forward sang trang home
-		response.sendRedirect("index.jsp");
-//		response.sendRedirect(request.getContextPath() + "/home");
+//		response.sendRedirect("index.jsp");
+		response.sendRedirect(request.getContextPath() + "/users");
 	}
 
 }

@@ -10,6 +10,9 @@
 <body>
 <form action="login" method="post">
     <h2>Đăng nhập</h2>
+    <c:if test="${not empty thanhcong }">
+    <p>${thanhcong }</p>
+    </c:if>
     <c:if test="${not empty loi }">
     <p>${loi }</p>
     </c:if>

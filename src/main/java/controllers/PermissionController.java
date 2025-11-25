@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import models.Users;
 
-@WebFilter({"/admin/*", "/AdminController"})
+@WebFilter({"/*"})
 public class PermissionController implements Filter {
 
     @Override
@@ -24,6 +24,8 @@ public class PermissionController implements Filter {
     	HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         
+        String path = req.getRequestURI().substring(req.getContextPath().length());
+        
         HttpSession session = req.getSession(false);
         Users user = null;
         if (session != null) {
@@ -31,9 +33,27 @@ public class PermissionController implements Filter {
         }
 
         // chặn các role ko phải admin
-        if (user == null || !"admin".equals(user.getRole())) {
-        	res.sendRedirect(req.getContextPath() + "/home"); // về controller home
-            return;
+        
+        if (path.startsWith("/admin")) {
+            if (user == null || !"admin".equals(user.getRole())) {
+                res.sendRedirect(req.getContextPath() + "/home");
+                return;
+            }
+        }
+        
+        // trang nhân viên
+        if (path.startsWith("/staff") || path.startsWith("/nhanvien")) {
+            if (user == null || !( "staff".equals(user.getRole()) || "admin".equals(user.getRole()) )) {
+                res.sendRedirect(req.getContextPath() + "/home");
+                return;
+            }
+        }
+        
+        if(path.startsWith("/users") || path.startsWith("/thongtin")) {
+        	if(user == null) {
+        		res.sendRedirect(req.getContextPath() + "/login");
+                return;
+        	}
         }
 
         // xử lý bình thường
