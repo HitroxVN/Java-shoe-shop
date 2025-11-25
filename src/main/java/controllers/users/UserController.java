@@ -92,7 +92,7 @@ public class UserController extends HttpServlet {
 		}
 		
 //		kiểm tra email trùng
-		if(authDao.checkEmail(email)) {
+		if(!email.equals(session.getEmail()) && authDao.checkEmail(email)) {
 			request.setAttribute("loiEmail", "Email đã tồn tại.");
 			request.setAttribute("inputAdd", u);
 			request.getRequestDispatcher("views/user/index.jsp").forward(request, response);

@@ -82,7 +82,7 @@ public class LoginController extends HttpServlet {
 		}
 //		forward sang trang home
 //		response.sendRedirect("index.jsp");
-		response.sendRedirect(request.getContextPath() + "/users");
+		response.sendRedirect(request.getContextPath() + "/home");
 	}
 
 }

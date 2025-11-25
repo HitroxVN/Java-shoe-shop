@@ -8,7 +8,7 @@
 <title>Thêm tài khoản</title>
 </head>
 <body>
-	<form action="admin" method="post">
+	<form action="${pageContext.request.contextPath}/admin/users" method="post">
 		<input type="hidden" name="action" value="add">
 		Họ tên: <input type="text" name="full_name" value="${inputAdd.full_name }" placeholder="A Đờ Min">
 		<c:if test="${not empty loi.loiTen }">${loi.loiTen }</c:if><br>
@@ -35,6 +35,6 @@
 		<button type="submit">Thêm tài khoản</button>
 	</form>
 
-	<a href="admin">Quay lại trang admin</a>
+	<a href="${pageContext.request.contextPath}/admin/users">Quay lại trang admin</a>
 </body>
 </html>

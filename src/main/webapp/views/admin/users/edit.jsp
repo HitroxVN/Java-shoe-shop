@@ -8,7 +8,7 @@
 <title>Sửa thông tin tài khoản</title>
 </head>
 <body>
-    <form action="admin" method="post">
+    <form action="${pageContext.request.contextPath}/admin/users" method="post">
 		<input type="hidden" name="action" value="edit">
 		<input type="hidden" name="user_id" value="${inputEdit.id}">
 		Họ tên: <input type="text" name="full_name" value="${inputEdit.full_name }" placeholder="A Đờ Min">
@@ -31,6 +31,6 @@
 		<button type="submit">Cập nhập</button>
 	</form>
 
-	<a href="admin">Quay lại trang admin</a>
+	<a href="${pageContext.request.contextPath}/admin/users">Quay lại trang admin</a>
 </body>
 </html>

@@ -11,14 +11,14 @@
 	<h2>Danh sách tài khoản người dùng</h2>
 	
 	<label>Tìm kiếm tài khoản theo tên, email, sđt</label>
-	<form action="admin" method="get">
+	<form action="${pageContext.request.contextPath}/admin/users" method="get">
 	<input type="hidden" name="action" value="search">
 	<input type="text" name="keyword" placeholder="Nhập tên cần tìm kiếm">
 	<button type="submit">Tìm kiếm</button>
 	</form>
 
 <label>Lọc theo role</label>
-	<form action="admin" method="get">
+	<form action="${pageContext.request.contextPath}/admin/users" method="get">
 		<input type="hidden" name="action" value="role_filter">
 		<select name="role">
 			<option value="customer">Khách hàng</option>
@@ -28,8 +28,8 @@
 		<button type="submit">Lọc</button>
 	</form>
 	
-	<a href="admin">Hiển thị tất cả</a><br>
-	<a href="admin?action=add">Thêm tài khoản</a>
+	<a href="${pageContext.request.contextPath}/admin/users">Hiển thị tất cả</a><br>
+	<a href="${pageContext.request.contextPath}/admin/users?action=add">Thêm tài khoản</a>
 	<c:if test="${not empty thanhcong }">
 		<p>${thanhcong }</p>
 	</c:if>
@@ -63,8 +63,8 @@
 						<c:when test="${u.role == 'admin'}">Quản lý</c:when>
 					</c:choose>
 					</th>
-					<th><a href="admin?action=edit&user_id=${u.id }">Sửa</a>
-					<form action="admin" method="post" onsubmit="return confirm('Xác nhận xoá user_id: ${u.id}');">
+					<th><a href="${pageContext.request.contextPath}/admin/users?action=edit&user_id=${u.id }">Sửa</a>
+					<form action="${pageContext.request.contextPath}/admin/users" method="post" onsubmit="return confirm('Xác nhận xoá user_id: ${u.id}');">
 						<input type="hidden" name="action" value="delete">
 						<input type="hidden" name="user_id" value="${u.id}">
 						<button type="submit">Xoá</button>
