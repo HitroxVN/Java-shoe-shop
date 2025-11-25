@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.CategoryStatistic;
 import models.CustomerStatistic;
 import models.ProductStatistic;
 import models.Products;
@@ -116,9 +117,103 @@ public class StatisticDAO {
 
 	    return list;
 	}
+	
+	// thể loai
+	// Lấy top 3 thương hiệu bán chạy nhất
+	public List<CategoryStatistic> topThuongHieuBanChay() {
+	    List<CategoryStatistic> list = new ArrayList<>();
+	    try {
+	        Connection connection = JDBConnection.getConnection();
+	        String sql = "SELECT c.id, c.name, SUM(oi.quantity) AS totalSold " +
+	                     "FROM order_items oi " +
+	                     "JOIN orders o ON oi.order_id = o.id " +
+	                     "JOIN products p ON oi.product_id = p.id " +
+	                     "JOIN categories c ON p.category_id = c.id " +
+	                     "WHERE o.status = 'delivered' " +
+	                     "GROUP BY c.id, c.name " +
+	                     "ORDER BY totalSold DESC " +
+	                     "LIMIT 3";
+
+	        PreparedStatement st = connection.prepareStatement(sql);
+	        ResultSet rs = st.executeQuery();
+
+	        while (rs.next()) {
+	            CategoryStatistic cs = new CategoryStatistic(
+	                rs.getInt("id"),
+	                rs.getString("name"),
+	                rs.getInt("totalSold")
+	            );
+	            list.add(cs);
+	        }
+
+	        JDBConnection.closeConnection(connection, st, rs);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return list;
+	}
+	// tổng số thể loại
+	public int soThuongHieu() {
+		int count = 0;
+		
+		try {
+			Connection c = JDBConnection.getConnection();
+			
+			String sql = "SELECT COUNT(*) FROM categories";
+			PreparedStatement st = c.prepareStatement(sql);
+			
+			ResultSet rs = st.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+			JDBConnection.closeConnection(c, st, rs);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return count;
+	}
+	
+	
+	// Lấy các thương hiệu có tổng số lượng sản phẩm trong kho < 100
+	public List<CategoryStatistic> thuongHieuTonThap() {
+	    List<CategoryStatistic> list = new ArrayList<>();
+	    try {
+	        Connection connection = JDBConnection.getConnection();
+	        String sql = "SELECT c.id, c.name, SUM(p.stock) AS totalStock " +
+	                     "FROM products p " +
+	                     "JOIN categories c ON p.category_id = c.id " +
+	                     "GROUP BY c.id, c.name " +
+	                     "HAVING totalStock < 100 " +
+	                     "ORDER BY totalStock ASC";
+
+	        PreparedStatement st = connection.prepareStatement(sql);
+	        ResultSet rs = st.executeQuery();
+
+	        while (rs.next()) {
+	            CategoryStatistic cs = new CategoryStatistic(
+	                rs.getInt("id"),
+	                rs.getString("name"),
+	                rs.getInt("totalStock")
+	            );
+	            list.add(cs);
+	        }
+
+	        JDBConnection.closeConnection(connection, st, rs);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return list;
+	}
+
+	
+	
 	// tổng số đơn hàng
 	// hàm lấy ra cố lượng đơn hàng
-	public int tongSanpham() {
+	public int tongSoDonHang() {
 		int totalOrders = 0;
 	    try {
 	        Connection connection = JDBConnection.getConnection();
@@ -320,7 +415,7 @@ public class StatisticDAO {
 	    }
 
 	    // 4. Tổng số đơn hàng
-	    System.out.println("\nTổng số đơn hàng: " + dao.tongSanpham());
+	    System.out.println("\nTổng số đơn hàng: " + dao.tongSoDonHang());
 
 	    // 5. Tổng số đơn hàng theo trạng thái
 	    String[] statuses = {"pending", "confirmed", "shipped", "delivered", "cancelled"};
@@ -348,5 +443,22 @@ public class StatisticDAO {
 	    for (String role : roles) {
 	        System.out.println(role + ": " + dao.tongTaiKhoanTheoRole(role));
 	    }
+	    
+	    // 9 top 3 thương hiệu bạn chạy nhất
+	    System.out.println("\nTop 3 thương hiệu bán chạy nhất:");
+	    List<CategoryStatistic> topCategories = dao.topThuongHieuBanChay();
+	    for (CategoryStatistic cs : topCategories) {
+	        System.out.println(cs.toString());
+	    }
+	    
+	    // 10 số lượng sp của thương hiệu nào it
+	    System.out.println("\nCác thương hiệu có tổng sản phẩm tồn kho < 100:");
+	    List<CategoryStatistic> lowStockCategories = dao.thuongHieuTonThap();
+	    for (CategoryStatistic cs : lowStockCategories) {
+	        System.out.println(cs.toString());
+	    }
+	    // 11 số lượng thể loại
+	    System.out.println(dao.soThuongHieu());
+
 	}
 }
