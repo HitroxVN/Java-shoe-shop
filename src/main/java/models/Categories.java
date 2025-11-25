@@ -1,55 +1,38 @@
 package models;
 
 public class Categories {
-	
+
 	private int id;
-	private int name;
-	
-	
+	private String name;
 
 	public int getId() {
 		return id;
 	}
 
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
-
-	public int getName() {
+	public String getName() {
 		return name;
 	}
 
-
-
-	public void setName(int name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-
-
-	public Categories() {
-		// TODO Auto-generated constructor stub
-	}
-
-
-
-	public Categories(int id, int name) {
+	public Categories(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 
-
-
-	@Override
-	public String toString() {
-		return "Categories [id=" + id + ", name=" + name + "]";
+	public Categories(String name) {
+		this.name = name;
 	}
-	
-	
+
+	public Categories() {
+
+	}
 
 }
