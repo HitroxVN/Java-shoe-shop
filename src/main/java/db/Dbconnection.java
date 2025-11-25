@@ -4,14 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBconnection {
+public class Dbconnection {
 	private static final String URL = "jdbc:mysql://localhost:3307/java_shop";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
     
     static {
         try {
-            // Load MySQL JDBC Driver 
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.err.println("MySQL JDBC Driver không tìm thấy!");

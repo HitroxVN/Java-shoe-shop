@@ -1,42 +1,38 @@
 package models;
 
 public class Categories {
+
 	private int id;
-    private String name;
+	private String name;
 
-    public Categories() {
-    }
+	public int getId() {
+		return id;
+	}
 
-    public Categories(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-    
-    public Categories(String name) {
-        this.name = name;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Categories(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Categories(String name) {
+		this.name = name;
+	}
 
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
+	public Categories() {
+
+	}
+
 }

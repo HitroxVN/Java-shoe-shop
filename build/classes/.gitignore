@@ -1,4 +1,5 @@
 /controllers/
 /dao/
-/models/
 /db/
+/models/
+/utils/
