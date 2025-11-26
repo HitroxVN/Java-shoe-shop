@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import db.Dbconnection;
 import models.CategoryStatistic;
 import models.CustomerStatistic;
 import models.ProductStatistic;
 import models.Products;
-import util.JDBConnection;
+import db.Dbconnection;
 
 public class StatisticDAO {
 	
@@ -20,7 +21,7 @@ public class StatisticDAO {
 		double doanhThu = 0;
 		
 		try {
-			Connection connection = JDBConnection.getConnection();
+			Connection connection = Dbconnection.getConnection();
 			
 			String sql = "SELECT SUM(total_amount) FROM orders WHERE status = 'delivered'";
 			PreparedStatement st = connection.prepareStatement(sql);
@@ -31,7 +32,7 @@ public class StatisticDAO {
 				doanhThu = rs.getDouble(1);
 			}
 			
-			JDBConnection.closeConnection(connection, st, rs);
+			Dbconnection.closeConnection(connection, st, rs);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,7 +47,7 @@ public class StatisticDAO {
 		List<ProductStatistic> list = new ArrayList();
 		
 		try {
-			Connection connection = JDBConnection.getConnection();
+			Connection connection = Dbconnection.getConnection();
 			
 			String sql = "SELECT p.id, p.name, SUM(oi.quantity) AS sold "
 		               + "FROM order_items oi "
@@ -70,7 +71,7 @@ public class StatisticDAO {
 	                list.add(productStatistic);
 	            }
 
-			JDBConnection.closeConnection(connection, st, rs);
+			Dbconnection.closeConnection(connection, st, rs);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -84,7 +85,7 @@ public class StatisticDAO {
 	    List<CustomerStatistic> list = new ArrayList<>();
 
 	    try {
-	        Connection connection = JDBConnection.getConnection();
+	        Connection connection = Dbconnection.getConnection();
 
 	        String sql = "SELECT u.id, u.full_name, "
 	                   + "COUNT(o.id) AS totalOrders, "
@@ -109,7 +110,7 @@ public class StatisticDAO {
 	            list.add(customer);
 	        }
 
-	        JDBConnection.closeConnection(connection, st, rs);
+	        Dbconnection.closeConnection(connection, st, rs);
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -123,7 +124,7 @@ public class StatisticDAO {
 	public List<CategoryStatistic> topThuongHieuBanChay() {
 	    List<CategoryStatistic> list = new ArrayList<>();
 	    try {
-	        Connection connection = JDBConnection.getConnection();
+	        Connection connection = Dbconnection.getConnection();
 	        String sql = "SELECT c.id, c.name, SUM(oi.quantity) AS totalSold " +
 	                     "FROM order_items oi " +
 	                     "JOIN orders o ON oi.order_id = o.id " +
@@ -146,7 +147,7 @@ public class StatisticDAO {
 	            list.add(cs);
 	        }
 
-	        JDBConnection.closeConnection(connection, st, rs);
+	        Dbconnection.closeConnection(connection, st, rs);
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -158,7 +159,7 @@ public class StatisticDAO {
 		int count = 0;
 		
 		try {
-			Connection c = JDBConnection.getConnection();
+			Connection c = Dbconnection.getConnection();
 			
 			String sql = "SELECT COUNT(*) FROM categories";
 			PreparedStatement st = c.prepareStatement(sql);
@@ -168,7 +169,7 @@ public class StatisticDAO {
 				count = rs.getInt(1);
 			}
 			
-			JDBConnection.closeConnection(c, st, rs);
+			Dbconnection.closeConnection(c, st, rs);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -181,7 +182,7 @@ public class StatisticDAO {
 	public List<CategoryStatistic> thuongHieuTonThap() {
 	    List<CategoryStatistic> list = new ArrayList<>();
 	    try {
-	        Connection connection = JDBConnection.getConnection();
+	        Connection connection = Dbconnection.getConnection();
 	        String sql = "SELECT c.id, c.name, SUM(p.stock) AS totalStock " +
 	                     "FROM products p " +
 	                     "JOIN categories c ON p.category_id = c.id " +
@@ -201,7 +202,7 @@ public class StatisticDAO {
 	            list.add(cs);
 	        }
 
-	        JDBConnection.closeConnection(connection, st, rs);
+	        Dbconnection.closeConnection(connection, st, rs);
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -216,14 +217,14 @@ public class StatisticDAO {
 	public int tongSoDonHang() {
 		int totalOrders = 0;
 	    try {
-	        Connection connection = JDBConnection.getConnection();
+	        Connection connection = Dbconnection.getConnection();
 	        String sql = "SELECT COUNT(*) FROM orders";
 	        PreparedStatement st = connection.prepareStatement(sql);
 	        ResultSet rs = st.executeQuery();
 	        if (rs.next()) {
 	            totalOrders = rs.getInt(1);
 	        }
-	        JDBConnection.closeConnection(connection, st, rs);
+	        Dbconnection.closeConnection(connection, st, rs);
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -236,7 +237,7 @@ public class StatisticDAO {
 	    int count = 0;
 
 	    try {
-	        Connection connection = JDBConnection.getConnection();
+	        Connection connection = Dbconnection.getConnection();
 
 	        String sql = "SELECT COUNT(*) FROM orders WHERE status = ?";
 	        PreparedStatement st = connection.prepareStatement(sql);
@@ -248,7 +249,7 @@ public class StatisticDAO {
 	            count = rs.getInt(1);
 	        }
 
-	        JDBConnection.closeConnection(connection, st, rs);
+	        Dbconnection.closeConnection(connection, st, rs);
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -262,14 +263,14 @@ public class StatisticDAO {
 	public int tongSanPham() {
 	    int total = 0;
 	    try {
-	        Connection connection = JDBConnection.getConnection();
+	        Connection connection = Dbconnection.getConnection();
 	        String sql = "SELECT COUNT(*) FROM products";
 	        PreparedStatement st = connection.prepareStatement(sql);
 	        ResultSet rs = st.executeQuery();
 
 	        if (rs.next()) total = rs.getInt(1);
 
-	        JDBConnection.closeConnection(connection, st, rs);
+	        Dbconnection.closeConnection(connection, st, rs);
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -281,14 +282,14 @@ public class StatisticDAO {
 		public int tongSanPhamTrongKho() {
 		    int total = 0;
 		    try {
-		        Connection connection = JDBConnection.getConnection();
+		        Connection connection = Dbconnection.getConnection();
 		        String sql = "SELECT SUM(stock) FROM products";
 		        PreparedStatement st = connection.prepareStatement(sql);
 		        ResultSet rs = st.executeQuery();
 
 		        if (rs.next()) total = rs.getInt(1);
 
-		        JDBConnection.closeConnection(connection, st, rs);
+		        Dbconnection.closeConnection(connection, st, rs);
 
 		    } catch (Exception e) {
 		        e.printStackTrace();
@@ -301,14 +302,14 @@ public class StatisticDAO {
 	public int tongSanPhamDaBan() {
 	    int total = 0;
 	    try {
-	        Connection connection = JDBConnection.getConnection();
+	        Connection connection = Dbconnection.getConnection();
 	        String sql = "SELECT SUM(quantity) FROM order_items";
 	        PreparedStatement st = connection.prepareStatement(sql);
 	        ResultSet rs = st.executeQuery();
 
 	        if (rs.next()) total = rs.getInt(1);
 
-	        JDBConnection.closeConnection(connection, st, rs);
+	        Dbconnection.closeConnection(connection, st, rs);
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -319,7 +320,7 @@ public class StatisticDAO {
 	public List<Products> sanPhamTonThap() {
 	    List<Products> list = new ArrayList<>();
 	    try {
-	        Connection connection = JDBConnection.getConnection();
+	        Connection connection = Dbconnection.getConnection();
 	        String sql = "SELECT * FROM products WHERE stock < 30 ORDER BY stock ASC";
 	        PreparedStatement st = connection.prepareStatement(sql);
 	        ResultSet rs = st.executeQuery();
@@ -338,7 +339,7 @@ public class StatisticDAO {
 	            list.add(product);
 	        }
 
-	        JDBConnection.closeConnection(connection, st, rs);
+	        Dbconnection.closeConnection(connection, st, rs);
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -353,7 +354,7 @@ public class StatisticDAO {
 	public int tongTaiKhoan() {
 	    int total = 0;
 	    try {
-	        Connection connection = JDBConnection.getConnection();
+	        Connection connection = Dbconnection.getConnection();
 	        String sql = "SELECT COUNT(*) FROM users";
 	        PreparedStatement st = connection.prepareStatement(sql);
 	        ResultSet rs = st.executeQuery();
@@ -362,7 +363,7 @@ public class StatisticDAO {
 	            total = rs.getInt(1);
 	        }
 
-	        JDBConnection.closeConnection(connection, st, rs);
+	        Dbconnection.closeConnection(connection, st, rs);
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -373,7 +374,7 @@ public class StatisticDAO {
 	public int tongTaiKhoanTheoRole(String role) {
 	    int total = 0;
 	    try {
-	        Connection connection = JDBConnection.getConnection();
+	        Connection connection = Dbconnection.getConnection();
 	        String sql = "SELECT COUNT(*) FROM users WHERE role = ?";
 	        PreparedStatement st = connection.prepareStatement(sql);
 	        st.setString(1, role);
@@ -383,7 +384,7 @@ public class StatisticDAO {
 	            total = rs.getInt(1);
 	        }
 
-	        JDBConnection.closeConnection(connection, st, rs);
+	        Dbconnection.closeConnection(connection, st, rs);
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
