@@ -5,63 +5,37 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import dao.OrderItemDAO;
 import models.OrderItem;
-import models.Users;
 
 @WebServlet("/OrderItemController")
 public class OrderItemController extends HttpServlet {
-
     private static final long serialVersionUID = 1L;
 
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Lấy user từ session
-        HttpSession session = request.getSession();
-        Users user = (Users) session.getAttribute("user");
-
-        // Nếu chưa đăng nhập → chuyển về login
-        if (user == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
-
-        OrderItemDAO dao = new OrderItemDAO();
-        List<OrderItem> list = null;
-        boolean canEdit = false; // quyền chỉnh sửa
+        // Thay vì lấy từ request, ta hardcode orderId để chạy trực tiếp
+        int orderId = 1; // đổi thành ID đơn hàng bạn muốn test
 
         try {
-            String role = user.getRole().toLowerCase();
+            OrderItemDAO dao = new OrderItemDAO();
+            List<OrderItem> items = dao.getItemsByOrderId(orderId);
 
-            if (role.equals("admin")) {
-                // Admin → xem tất cả, có quyền quản lý
-                list = dao.getAllOrderItems();
-                canEdit = true;
-            } else if (role.equals("staff")) {
-                // Staff → xem tất cả nhưng không được edit/delete
-                list = dao.getAllOrderItems();
-                canEdit = false;
-            } else {
-                // User → chỉ xem order items của mình
-                list = dao.getOrderItemsByUser(user.getId());
-                canEdit = false;
-            }
+            request.setAttribute("items", items);
+            request.setAttribute("orderId", orderId); // để hiển thị orderId nếu muốn
+            request.getRequestDispatcher("views/order_items.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi khi lấy dữ liệu đơn hàng");
         }
-
-        // Gửi dữ liệu sang JSP
-        request.setAttribute("items", list);
-        request.setAttribute("canEdit", canEdit);
-        request.getRequestDispatcher("order_items.jsp").forward(request, response);
     }
 
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
