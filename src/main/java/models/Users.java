@@ -1,7 +1,3 @@
-/**
- * Author: Hoàng Văn Trường
- * Created on: Nov 21, 2025
- */
 package models;
 
 public class Users {

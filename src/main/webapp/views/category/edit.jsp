@@ -11,7 +11,15 @@
 <body>
  <h2>Sửa loại sản phẩm</h2>
         
-        <!-- Hiển thị lỗi -->
+        <!-- Hiển thị thông báo lỗi/thoong báo thành công -->
+        <c:if test="${not empty error}">
+            <div class="error-single">${error}</div>
+        </c:if>
+        <c:if test="${not empty message}">
+            <div class="success">${message}</div>
+        </c:if>
+
+        <!-- Hiển thị lỗi danh sách -->
         <c:if test="${not empty errors}">
             <div class="error-list">
                 <strong>Vui lòng sửa các lỗi sau:</strong>

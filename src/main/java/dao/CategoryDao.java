@@ -32,7 +32,32 @@ public class CategoryDao {
 		}
 		return categories;
 	}
+	// tìm kiếm danh mục 
+		public List<Categories> getSearch(String search) {
+			List<Categories> categories = new ArrayList<>();
+			String sql = "SELECT * FROM categories where name LIKE ?";
 
+			try {
+				Connection c = Dbconnection.getConnection();
+				
+				PreparedStatement st = c.prepareStatement(sql);
+				st.setString(1, "%"+search+"%");
+				
+				ResultSet rs = st.executeQuery();
+				
+				while (rs.next()) {
+					Categories category = new Categories();
+					category.setId(rs.getInt("id"));
+					category.setName(rs.getString("name"));
+					categories.add(category);
+				}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			return categories;
+		}
 	// Lấy loại sản phẩm theo ID
 	public Categories getCategoryById(int id) {
 		Categories category = null;
@@ -112,6 +137,37 @@ public class CategoryDao {
 
 			if (rs.next()) {
 				return rs.getInt("count") > 0;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	// Kiểm tra tồn tại tên danh mục (toàn cục)
+	public boolean existsByName(String name) {
+		String sql = "SELECT COUNT(*) FROM categories WHERE name = ?";
+		try (Connection conn = Dbconnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setString(1, name);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1) > 0;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	// Kiểm tra tồn tại tên danh mục, loại trừ id (dùng khi update)
+	public boolean existsByNameExcludingId(String name, int id) {
+		String sql = "SELECT COUNT(*) FROM categories WHERE name = ? AND id <> ?";
+		try (Connection conn = Dbconnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setString(1, name);
+			ps.setInt(2, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1) > 0;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

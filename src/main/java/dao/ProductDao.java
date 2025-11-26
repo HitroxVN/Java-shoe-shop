@@ -91,6 +91,37 @@ public class ProductDao {
 		}
 	}
 
+	// Kiểm tra tồn tại tên sản phẩm (toàn cục)
+	public boolean existsByName(String name) {
+		String sql = "SELECT COUNT(*) FROM products WHERE name = ?";
+		try (Connection conn = Dbconnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setString(1, name);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1) > 0;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	// Kiểm tra tồn tại tên sản phẩm, loại bỏ chính product có id (dùng khi update)
+	public boolean existsByNameExcludingId(String name, int id) {
+		String sql = "SELECT COUNT(*) FROM products WHERE name = ? AND id <> ?";
+		try (Connection conn = Dbconnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setString(1, name);
+			ps.setInt(2, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1) > 0;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	// Cập nhật sản phẩm
 	public boolean updateProduct(Products product) {
 		String sql = "UPDATE products SET category_id=?, name=?, description=?, price=?, "
