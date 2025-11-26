@@ -1,62 +1,61 @@
 package models;
 
 public class Carts {
-	
-	private int id;
-	private int user_id;
-	private int product_id;
-	private int quantity;
+    private int id;
+    private int productId;
+    private String productName;
+    private double productPrice;
+    private int quantity;
 
-	
-	
+    public Carts() {}
+    
+    
+    public Carts(int id, int productId, String productName, double productPrice, int quantity) {
+		this.id = id;
+		this.productId = productId;
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.quantity = quantity;
+	}
+
+
 	public int getId() {
-		return id;
-	}
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public int getUser_id() {
-		return user_id;
-	}
+    public int getProductId() {
+        return productId;
+    }
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 
-	public int getProduct_id() {
-		return product_id;
-	}
+    public String getProductName() {
+        return productName;
+    }
 
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
-	}
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
-	public int getQuantity() {
-		return quantity;
-	}
+    public double getProductPrice() {
+        return productPrice;
+    }
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
+    }
 
-	public Carts() {
-		// TODO Auto-generated constructor stub
-	}
+    public int getQuantity() {
+        return quantity;
+    }
 
-	public Carts(int id, int user_id, int product_id, int quantity) {
-		super();
-		this.id = id;
-		this.user_id = user_id;
-		this.product_id = product_id;
-		this.quantity = quantity;
-	}
-
-	@Override
-	public String toString() {
-		return "Carts [id=" + id + ", user_id=" + user_id + ", product_id=" + product_id + ", quantity=" + quantity
-				+ "]";
-	}
-	
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

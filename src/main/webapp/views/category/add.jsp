@@ -31,7 +31,6 @@
                 <input type="text" id="name" name="name" value="${category.name}" 
                        placeholder="VD: Giày Thể Thao, Giày Công Sở..." required>
             </div>
-            
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Thêm loại sản phẩm</button>
                 <a href="CategoryController" class="btn btn-secondary">Hủy</a>

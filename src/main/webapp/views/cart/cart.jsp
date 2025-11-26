@@ -3,34 +3,38 @@
 
 <h2>Giỏ hàng</h2>
 
-<table border="1">
+<table border="1" cellspacing="0" cellpadding="10">
     <tr>
-        <th>Sản phẩm</th>
-        <th>Số lượng</th>
+        <th>ID</th>
+        <th>Tên sản phẩm</th>
         <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Thành tiền</th>
         <th>Thao tác</th>
     </tr>
 
-    <c:forEach var="item" items="${cartItems}">
+    <c:forEach var="item" items="${cartList}">
         <tr>
-            <td>${item.product.name}</td>
+            <td>${item.id}</td>
+            <td>${item.productName}</td>
+            <td>${item.productPrice}</td>
 
             <td>
                 <form action="cart" method="post">
-                    <input type="hidden" name="action" value="update"/>
-                    <input type="hidden" name="cartId" value="${item.cart.id}"/>
-                    <input type="number" name="quantity" min="1" value="${item.cart.quantity}"/>
-                    <input type="submit" value="Cập nhật"/>
+                    <input type="hidden" name="action" value="update">
+                    <input type="hidden" name="cartId" value="${item.id}">
+                    <input type="number" min="1" name="quantity" value="${item.quantity}">
+                    <input type="submit" value="Cập nhật">
                 </form>
             </td>
 
-            <td>${item.product.price}</td>
+            <td>${item.productPrice * item.quantity}</td>
 
             <td>
                 <form action="cart" method="post">
-                    <input type="hidden" name="action" value="remove"/>
-                    <input type="hidden" name="cartId" value="${item.cart.id}"/>
-                    <input type="submit" value="Xóa"/>
+                    <input type="hidden" name="action" value="remove">
+                    <input type="hidden" name="cartId" value="${item.id}">
+                    <input type="submit" value="Xóa">
                 </form>
             </td>
         </tr>
