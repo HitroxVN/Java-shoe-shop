@@ -16,26 +16,16 @@
             <th>Product ID</th>
             <th>Quantity</th>
             <th>Price</th>
-            <th>User ID</th>
-            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         <c:forEach var="item" items="${items}">
             <tr>
                 <td>${item.id}</td>
-                <td>${item.orderId}</td>
-                <td>${item.productId}</td>
+                <td>${item.order_id}</td>
+                <td>${item.product_id}</td>
                 <td>${item.quantity}</td>
                 <td>${item.price}</td>
-                <td>${item.userId}</td>
-                <td>
-                    <c:if test="${canEdit}">
-                        <a href="editOrderItem?id=${item.id}">Edit</a>
-                        <a href="deleteOrderItem?id=${item.id}"
-                           onclick="return confirm('Bạn có chắc muốn xóa item này?');">Delete</a>
-                    </c:if>
-                </td>
             </tr>
         </c:forEach>
     </tbody>

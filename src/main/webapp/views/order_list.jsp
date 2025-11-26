@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,7 @@
 <body>
 <h2>Danh sách đơn hàng</h2>
 
-<table border="1" cellpadding="10">
+<table border="1">
     <tr>
         <th>ID</th>
         <th>User ID</th>
@@ -31,14 +32,13 @@
 
             <td>
                 <c:if test="${o.status == 'pending'}">
-                    <a href="Odercontrollers?action=confirm&id=${o.id}">
-                        ✔ Xác nhận
-                    </a>
+                    <a href="Odercontrollers?action=confirm&id=${o.id}">Xác nhận</a>
                 </c:if>
 
                 <c:if test="${o.status != 'pending'}">
                     Đã xử lý
                 </c:if>
+                <a href="OrderItemController?id=${o.id}">Xem chi tiết đơn hàng</a>
             </td>
         </tr>
     </c:forEach>
