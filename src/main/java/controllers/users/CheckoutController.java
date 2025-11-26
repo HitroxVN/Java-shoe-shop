@@ -1,4 +1,4 @@
-package controllers;
+package controllers.users;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CartDao;
-import dao.OrderDao;
-import dao.OrderItemDao;
+import dao.OrderDAO;
+import dao.OrderItemDAO;
 import models.Carts;
 import models.Orders;
 import models.Order_items;
@@ -20,8 +20,8 @@ import models.Order_items;
 public class CheckoutController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private CartDao cartDao = new CartDao();
-    private OrderDao orderDao = new OrderDao();
-    private OrderItemDao orderItemDao = new OrderItemDao();
+    private OrderDAO orderDao = new OrderDAO();
+    private OrderItemDAO orderItemDao = new OrderItemDAO();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

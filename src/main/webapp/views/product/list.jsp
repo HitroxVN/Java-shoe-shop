@@ -9,7 +9,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-style.css">
 </head>
 <body>
 <h2>Quản lý sản phẩm</h2>

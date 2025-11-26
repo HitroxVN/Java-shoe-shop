@@ -1,4 +1,4 @@
-package controllers;
+package controllers.users;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.CartDao;
 import models.Carts;
+import models.Users;
 
 @WebServlet("/cart")
 public class CartController extends HttpServlet {
@@ -21,7 +22,10 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
 
         // Tạm test userId = 1 (sau này lấy từ session)
-        List<Carts> cartList = cartDao.getCartByUserId(1);
+    	
+    	Users session = (Users) request.getSession().getAttribute("user");
+    	int uid = session.getId();
+        List<Carts> cartList = cartDao.getCartByUserId(uid);
 
         request.setAttribute("cartList", cartList);
         request.getRequestDispatcher("/views/cart/cart.jsp").forward(request, response);
@@ -33,10 +37,13 @@ public class CartController extends HttpServlet {
         String action = request.getParameter("action");
 
         if ("add".equals(action)) {
+        	
 
             int userId = Integer.parseInt(request.getParameter("userId"));
             int productId = Integer.parseInt(request.getParameter("productId"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
+            
+//            System.out.println(userId);
 
             // Dùng constructor rỗng và set các field
             Carts cart = new Carts();
@@ -45,7 +52,9 @@ public class CartController extends HttpServlet {
             cart.setQuantity(quantity);
 
             cartDao.addToCart(cart);
-            response.sendRedirect("cart");
+//            request.getRequestDispatcher("views/cart/cart.jsp").forward(request, response);
+//            response.sendRedirect("cart");
+            response.sendRedirect(request.getContextPath() + "/cart");
 
         } else if ("update".equals(action)) {
 

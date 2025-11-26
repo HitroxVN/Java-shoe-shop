@@ -38,6 +38,31 @@ public class OrderDAO {
 
         return list;
     }
+    
+    public int createOrder(Orders order) {
+        String sql = "INSERT INTO orders(user_id, shipping_address, total_amount, payment_method, status, created_at, updated_at) VALUES(?,?,?,?,?,NOW(),NOW())";
+        
+        try (Connection conn = Dbconnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            ps.setInt(1, order.getUser_id());
+            ps.setString(2, order.getShipping_address());
+            ps.setDouble(3, order.getTotal_amount());
+            ps.setString(4, order.getPayment_method());
+            ps.setString(5, order.getStatus());
+
+            if (ps.executeUpdate() > 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 
 
 

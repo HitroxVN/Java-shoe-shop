@@ -13,6 +13,7 @@ import dao.CategoryDao;
 import dao.ProductDao;
 import models.Categories;
 import models.Products;
+import models.Users;
 
 /**
  * Servlet implementation class HomeController
@@ -63,6 +64,9 @@ public class HomeController extends HttpServlet {
 		} catch (Exception e) {
 		}
 
+		Users session = (Users) request.getSession().getAttribute("user");
+		
+		request.setAttribute("user", session);
 		List<Products> products = productDao.search(null, categoryId);
 		List<Categories> categories = categoryDao.getAll();
 

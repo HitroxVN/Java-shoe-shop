@@ -46,6 +46,7 @@
 </div>
 
 <div class="container">
+	
     <div class="detail">
         <div class="image">
             <c:choose>
@@ -79,18 +80,26 @@
                     <button onclick="selectSize(this)">${size}</button>
                 </c:forEach>
             </div>
-
+	
+	<form action="cart" method="post">
             <div class="quantity">
                 <strong>Số lượng:</strong>
-                <button onclick="decreaseQty()">-</button>
-                <input type="number" id="qty" value="1" min="1" max="${product.stock}">
-                <button onclick="increaseQty()">+</button>
+				
+                <input name="quantity" type="number" id="qty" value="1" min="1" max="${product.stock}">
+
             </div>
 
             <div class="buttons">
-                <button class="btn-cart">Thêm Vào Giỏ Hàng</button>
-                <button class="btn-buy">Mua Ngay</button>
+            <input type="hidden" name="userId" value="${user.id }">
+            <input type="hidden" name="action" value="add">
+            <input type="hidden" name="productId" value="${product.id}">
+            
+            <button class="btn-cart" type="submit">Thêm Vào Giỏ Hàng</button>
+            
+                
             </div>
+            
+            </form>
         </div>
     </div>
 

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.admin;
 
 import java.io.IOException;
 import java.util.List;
@@ -62,13 +62,9 @@ public class OrderController extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             OrderDAO dao = new OrderDAO();
-            boolean check = dao.updateStatus(id, "confirmed");
+            dao.updateStatus(id, "confirmed");
 
-            if (check) {
-                System.out.println("Xác nhận đơn hàng thành công!");
-            } else {
-                System.out.println("Lỗi khi xác nhận đơn hàng.");
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

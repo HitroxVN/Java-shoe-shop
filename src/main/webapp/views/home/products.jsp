@@ -31,7 +31,10 @@
     <a href="login">Đăng nhập</a></c:if>
    	<c:if test="${ not empty user }">
    		 <a href="thongtin">${user.full_name }</a>
+   		 <a href="cart">Giỏ hàng</a>
    	</c:if>
+   	
+   	
     
 </div>
 

@@ -1,6 +1,9 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +37,24 @@ public class PermissionController implements Filter {
 
         // chặn các role ko phải admin
         
-        if (path.startsWith("/admin") || path.startsWith("/statistic")) {
-            if (user == null || !"admin".equals(user.getRole())) {
-                res.sendRedirect(req.getContextPath() + "/home");
-                return;
-            }
-        }
+        List<String> adminPaths = List.of(
+        	    "/admin",
+        	    "/statistic",
+        	    "/CategoryController",
+        	    "/OrderController",
+        	    "/OrderItemController",
+        	    "/ProductController"
+        	);
+
+		boolean needAdmin = adminPaths.stream().anyMatch(path::startsWith);
+
+		if (needAdmin) {
+			if (user == null || !"admin".equals(user.getRole())) {
+				res.sendRedirect(req.getContextPath() + "/home");
+				return;
+			}
+		}
+
         
         // trang nhân viên
         if (path.startsWith("/staff") || path.startsWith("/nhanvien")) {
