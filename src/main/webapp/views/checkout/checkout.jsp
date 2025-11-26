@@ -48,11 +48,6 @@
     </tr>
 
     <tr>
-        <td><b>Phí vận chuyển:</b></td>
-        <td>0 VNĐ</td>
-    </tr>
-
-    <tr>
         <th>Tổng cộng:</th>
         <th>${totalAmount} VNĐ</th>
     </tr>
@@ -78,11 +73,8 @@
             <td>Phương thức thanh toán *</td>
             <td>
                 <select name="paymentMethod" required>
-                    <option value="">-- Chọn phương thức thanh toán --</option>
-                    <option value="cash">Thanh toán khi nhận hàng</option>
-                    <option value="bank_transfer">Chuyển khoản ngân hàng</option>
-                    <option value="credit_card">Thẻ tín dụng</option>
-                    <option value="ewallet">Ví điện tử</option>
+                    <option value="COD">Thanh toán khi nhận hàng</option>
+                    <option value="BANKING">Chuyển khoản ngân hàng</option>
                 </select>
             </td>
         </tr>
