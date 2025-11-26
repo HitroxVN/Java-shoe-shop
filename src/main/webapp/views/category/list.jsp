@@ -20,7 +20,14 @@
         <c:if test="${not empty error}">
             <div class="alert alert-error">${error}</div>
         </c:if>
-        
+        <!-- Form tìm kiếm -->
+	<form action="CategoryController" method="get" style="margin: 20px 0;">
+		<input type="hidden" name="action" value="search"> <input
+			type="text" name="keyword" placeholder="Nhập tên loại cần tìm..."
+			value="${param.keyword}" />
+		<button type="submit" class="btn btn-primary">Tìm kiếm</button>
+		<a href="CategoryController" class="btn btn-secondary">Reset</a>
+	</form>
         <!-- Actions -->
         <div class="actions">
             <a href="CategoryController?action=add" class="btn btn-primary">+ Thêm loại sản phẩm mới</a>

@@ -46,22 +46,25 @@ public class CategoryController extends HttpServlet {
 		}
 
 		switch (action) {
-		case "list":
-			listCategories(request, response);
-			break;
-		case "add":
-			showAddForm(request, response);
-			break;
-		case "edit":
-			showEditForm(request, response);
-			break;
-		case "delete":
-			deleteCategory(request, response);
-			break;
-		default:
-			listCategories(request, response);
-			break;
-		}
+	    case "list":
+	        listCategories(request, response);
+	        break;
+	    case "search":
+	        searchCategories(request, response);
+	        break;
+	    case "add":
+	        showAddForm(request, response);
+	        break;
+	    case "edit":
+	        showEditForm(request, response);
+	        break;
+	    case "delete":
+	        deleteCategory(request, response);
+	        break;
+	    default:
+	        listCategories(request, response);
+	        break;
+	}
 	}
 
 	@Override
@@ -98,8 +101,24 @@ public class CategoryController extends HttpServlet {
 			throws ServletException, IOException {
 		request.getRequestDispatcher("views/category/add.jsp").forward(request, response);
 	}
+	private void searchCategories(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	private void addCategory(HttpServletRequest request, HttpServletResponse response)
+		String keyword = request.getParameter("keyword");
+
+		List<Categories> listCategories;
+
+		if (keyword == null || keyword.trim().isEmpty()) {
+			listCategories = categoryDao.getAll(); // không có từ khóa → trả lại full
+		} else {
+			listCategories = categoryDao.getSearch(keyword);
+		}
+
+		request.setAttribute("listCategories", listCategories);
+		request.setAttribute("keyword", keyword);
+
+		request.getRequestDispatcher("views/category/list.jsp").forward(request, response);
+	}	private void addCategory(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String name = request.getParameter("name");
 
@@ -143,6 +162,14 @@ public class CategoryController extends HttpServlet {
 		List<String> errors = ProductValidation.validateCategory(category);
 		if (!errors.isEmpty()) {
 			request.setAttribute("errors", errors);
+			request.setAttribute("category", category);
+			request.getRequestDispatcher("views/category/edit.jsp").forward(request, response);
+			return;
+		}
+
+		// Kiểm tra trùng tên danh mục (loại trừ chính id) - Option A behavior
+		if (categoryDao.existsByNameExcludingId(name, id)) {
+			request.setAttribute("error", "Tên danh mục đã tồn tại. Vui lòng chọn tên khác.");
 			request.setAttribute("category", category);
 			request.getRequestDispatcher("views/category/edit.jsp").forward(request, response);
 			return;

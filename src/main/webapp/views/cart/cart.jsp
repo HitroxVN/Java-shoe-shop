@@ -37,6 +37,25 @@
                     <input type="submit" value="Xóa">
                 </form>
             </td>
+            
         </tr>
     </c:forEach>
 </table>
+
+<br/>
+<%
+    double total = 0;
+    java.util.List<models.Carts> cartList = (java.util.List<models.Carts>) request.getAttribute("cartList");
+    if (cartList != null) {
+        for (models.Carts cart : cartList) {
+            total += cart.getProductPrice() * cart.getQuantity();
+        }
+    }
+%>
+
+<h3>Tổng tiền: <%= total %> VNĐ</h3>
+
+<form action="checkout" method="get">
+    <input type="hidden" name="userId" value="1" />
+    <input type="submit" value="Thanh toán" style="padding:10px 16px;background:#4CAF50;color:#fff;border:none;border-radius:4px;cursor:pointer;" />
+</form>
