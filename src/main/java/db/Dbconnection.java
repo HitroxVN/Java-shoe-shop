@@ -12,7 +12,7 @@ public class Dbconnection {
     private static final String PORT = "3306";
     private static final String USER = "root";
     private static final String DATABASE = "java_shop";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "123456";
 
     // Thêm useSSL=false và serverTimezone để tránh SSLException và lỗi timezone
     private static final String JDBC_URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE

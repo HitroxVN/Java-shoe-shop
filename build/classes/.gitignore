@@ -1,2 +1,4 @@
-/db/
 /controllers/
+/dao/
+/db/
+/models/

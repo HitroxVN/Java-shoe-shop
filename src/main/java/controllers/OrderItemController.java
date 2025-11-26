@@ -19,8 +19,6 @@ public class OrderItemController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Thay vì lấy từ request, ta hardcode orderId để chạy trực tiếp
-//        int orderId = 1; // đổi thành ID đơn hàng bạn muốn test
     	String oid = request.getParameter("id");
     	int orderId = Integer.parseInt(oid);
 

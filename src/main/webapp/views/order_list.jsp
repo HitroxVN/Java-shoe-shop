@@ -32,7 +32,7 @@
 
             <td>
                 <c:if test="${o.status == 'pending'}">
-                    <a href="Odercontrollers?action=confirm&id=${o.id}">Xác nhận</a>
+                    <a href="Ordercontrollers?action=confirm&id=${o.id}">Xác nhận</a>
                 </c:if>
 
                 <c:if test="${o.status != 'pending'}">
