@@ -8,6 +8,7 @@
 </head>
 <body>
 <a href="${pageContext.request.contextPath}/admin/users">Trang quản lý người dùng</a><br>
-<a href="ProductController">Trang quản lý sản phẩm</a>
+<a href="ProductController">Trang quản lý sản phẩm</a><br>
+<a href="statistic/home">Trang thống kê</a>
 </body>
 </html>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +27,12 @@
     <c:forEach items="${categories}" var="cat">
         <a href="home?category_id=${cat.id}">${cat.name}</a>
     </c:forEach>
+    <c:if test="${empty user}">
+    <a href="login">Đăng nhập</a></c:if>
+   	<c:if test="${ not empty user }">
+   		 <a href="thongtin">${user.full_name }</a>
+   	</c:if>
+    
 </div>
 
 <div class="container">

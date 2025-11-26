@@ -34,7 +34,7 @@ public class PermissionController implements Filter {
 
         // chặn các role ko phải admin
         
-        if (path.startsWith("/admin")) {
+        if (path.startsWith("/admin") || path.startsWith("/statistic")) {
             if (user == null || !"admin".equals(user.getRole())) {
                 res.sendRedirect(req.getContextPath() + "/home");
                 return;
