@@ -16,6 +16,7 @@
             <th>Product ID</th>
             <th>Quantity</th>
             <th>Price</th>
+            <th>Ngày tạo đơn</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
                 <td>${item.product_id}</td>
                 <td>${item.quantity}</td>
                 <td>${item.price}</td>
+                <td>${item.created_at}</td>
             </tr>
         </c:forEach>
     </tbody>

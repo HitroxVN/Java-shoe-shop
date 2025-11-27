@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.OrderItemDAO;
+import dao.ProductDao;
 import models.OrderItem;
+import models.Products;
 
 @WebServlet("/OrderItemController")
 public class OrderItemController extends HttpServlet {
@@ -24,7 +26,11 @@ public class OrderItemController extends HttpServlet {
 
         try {
             OrderItemDAO dao = new OrderItemDAO();
+//            ProductDao pdao = new ProductDao();
+            
             List<OrderItem> items = dao.getItemsByOrderId(orderId);
+            
+//            Products product = pdao.getProductById(items);
 
             request.setAttribute("items", items);
             request.setAttribute("orderId", orderId); // để hiển thị orderId nếu muốn
