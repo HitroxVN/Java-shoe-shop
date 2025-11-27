@@ -1,6 +1,7 @@
 package controllers.users;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import dao.OrderDAO;
 import dao.OrderItemDAO;
+import dao.ProductDao;
 import models.Orders;
+import models.Products;
 import models.OrderItem;
 import models.Users;
 
@@ -78,6 +81,16 @@ public class UserOrderController extends HttpServlet {
         // Lấy chi tiết sản phẩm trong đơn hàng
         OrderItemDAO itemDao = new OrderItemDAO();
         List<OrderItem> items = itemDao.getItemsByOrderId(orderId);
+        
+        
+        ProductDao pdao = new ProductDao();
+        List<Products> p = new ArrayList<Products>();
+        for (OrderItem orderItem : items) {
+			Products pp = pdao.getProductById(orderItem.getProduct_id());
+			p.add(pp);
+		}
+        
+        request.setAttribute("pp", p);
 
         request.setAttribute("items", items);
         request.setAttribute("orderId", orderId);

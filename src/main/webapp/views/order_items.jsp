@@ -13,7 +13,7 @@
         <tr>
             <th>ID</th>
             <th>Order ID</th>
-            <th>Product ID</th>
+            <th>Product Name</th>
             <th>Quantity</th>
             <th>Price</th>
             <th>Ngày tạo đơn</th>
@@ -24,7 +24,13 @@
             <tr>
                 <td>${item.id}</td>
                 <td>${item.order_id}</td>
-                <td>${item.product_id}</td>
+                <td>
+                	<c:forEach var="ip" items="${pp}">
+							<c:if test="${ip.id == item.product_id}">
+							   ${ip.name}
+							</c:if>
+						</c:forEach>
+                </td>
                 <td>${item.quantity}</td>
                 <td>${item.price}</td>
                 <td>${item.created_at}</td>

@@ -1,6 +1,7 @@
 package controllers.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,9 +27,17 @@ public class OrderItemController extends HttpServlet {
 
         try {
             OrderItemDAO dao = new OrderItemDAO();
-//            ProductDao pdao = new ProductDao();
+            ProductDao pdao = new ProductDao();
             
             List<OrderItem> items = dao.getItemsByOrderId(orderId);
+            
+            List<Products> p = new ArrayList<Products>();
+            for (OrderItem orderItem : items) {
+				Products pp = pdao.getProductById(orderItem.getProduct_id());
+				p.add(pp);
+			}
+            
+            request.setAttribute("pp", p);
             
 //            Products product = pdao.getProductById(items);
 
