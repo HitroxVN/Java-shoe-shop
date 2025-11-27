@@ -37,7 +37,7 @@
                         <td>${o.payment_method}</td>
                         <td>${o.status}</td>
                         <td>
-                            <a href="UserController?action=orderDetail&id=${o.id}">Xem chi tiết</a>
+                            <a href="UserOrderController?action=orderDetail&id=${o.id}">Xem chi tiết</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -48,6 +48,8 @@
         <p>Bạn chưa có đơn hàng nào.</p>
     </c:otherwise>
 </c:choose>
+
+<a href="home">Quay lại trang chủ</a>
 
 </body>
 </html>

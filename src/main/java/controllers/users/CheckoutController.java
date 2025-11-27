@@ -14,6 +14,7 @@ import dao.OrderDAO;
 import dao.OrderItemDAO;
 import models.Carts;
 import models.Orders;
+import models.Users;
 import models.Order_items;
 
 @WebServlet("/checkout")
@@ -27,7 +28,9 @@ public class CheckoutController extends HttpServlet {
             throws ServletException, IOException {
         
         // Lấy userId từ session (tạm test userId = 1)
-        int userId = 1;
+//        int userId = 1;
+    	Users session = (Users) request.getSession().getAttribute("user");
+    	int userId = session.getId();
         
         // Lấy danh sách sản phẩm trong giỏ hàng
         List<Carts> cartList = cartDao.getCartByUserId(userId);
@@ -86,7 +89,7 @@ public class CheckoutController extends HttpServlet {
                 }
                 
                 // Chuyển hướng đến trang xác nhận
-                response.sendRedirect("checkout?success=true&orderId=" + orderId);
+                response.sendRedirect("UserOrderController?action=orderDetail&id=" + orderId);
             } else {
                 response.sendRedirect("checkout?error=true");
             }

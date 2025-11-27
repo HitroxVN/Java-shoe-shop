@@ -48,7 +48,7 @@
 </c:choose>
 
 <br>
-<a href="UserController?action=orderList">Quay lại danh sách đơn hàng</a>
+<a href="UserOrderController?action=orderList">Quay lại danh sách đơn hàng</a>
 
 </body>
 </html>

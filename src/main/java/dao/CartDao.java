@@ -28,7 +28,7 @@ public class CartDao {
             while (rs.next()) {
                 Carts cart = new Carts();
                 cart.setId(rs.getInt("id"));
-                cart.setProductId(userId);
+                cart.setProductId(rs.getInt("product_id"));
                 cart.setQuantity(rs.getInt("quantity"));
                 cart.setProductName(rs.getString("productName"));
                 cart.setProductPrice(rs.getDouble("productPrice"));

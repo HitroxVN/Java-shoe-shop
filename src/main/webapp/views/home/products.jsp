@@ -22,19 +22,21 @@
 </style>
 </head>
 <body>
+<nav>
+	<c:if test="${empty user}">
+    	<a href="login">Đăng nhập</a>
+    </c:if>
+   	<c:if test="${not empty user }">
+   		 <a href="thongtin">${user.full_name }</a><br>
+   		 <a href="cart">Giỏ hàng</a><br>
+   		 <a href="UserOrderController">Đơn hàng của tôi</a><br>
+   	</c:if>
+ </nav>
 <div class="header">
     <a href="home">TRANG CHỦ</a>
     <c:forEach items="${categories}" var="cat">
         <a href="home?category_id=${cat.id}">${cat.name}</a>
     </c:forEach>
-    <c:if test="${empty user}">
-    <a href="login">Đăng nhập</a></c:if>
-   	<c:if test="${ not empty user }">
-   		 <a href="thongtin">${user.full_name }</a>
-   		 <a href="cart">Giỏ hàng</a>
-   	</c:if>
-   	
-   	
     
 </div>
 

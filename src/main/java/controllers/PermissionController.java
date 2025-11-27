@@ -64,7 +64,7 @@ public class PermissionController implements Filter {
             }
         }
         
-        if(path.startsWith("/users") || path.startsWith("/thongtin")) {
+        if(path.startsWith("/users") || path.startsWith("/thongtin") || path.startsWith("/cart")) {
         	if(user == null) {
         		res.sendRedirect(req.getContextPath() + "/login");
                 return;
