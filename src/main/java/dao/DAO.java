@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import models.Products;
 import models.Users;
 
 public class DAO {
@@ -23,6 +24,24 @@ public class DAO {
 				rs.getString("address"),
 				rs.getString("role")
 				);
+	}
+	
+	protected Products mapProduct(ResultSet rs) throws SQLException {
+		Products p = new Products();
+		p.setId(rs.getInt("id"));
+		p.setCategory_id(rs.getInt("category_id"));
+		p.setName(rs.getString("name"));
+		p.setDescription(rs.getString("description"));
+		p.setPrice(rs.getDouble("price"));
+		p.setImage(rs.getString("image"));
+		p.setSize(rs.getString("size"));
+		p.setStock(rs.getInt("stock"));
+		try {
+			p.setCategoryName(rs.getString("category_name"));
+		} catch (SQLException e) {
+			// Không có category_name
+		}
+		return p;
 	}
 	
 	// hash password SHA-256

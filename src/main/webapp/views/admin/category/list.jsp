@@ -69,5 +69,7 @@
                 </c:choose>
             </tbody>
         </table>
+        
+        <a href="admin">Trang quản lý</a>
 </body>
 </html>

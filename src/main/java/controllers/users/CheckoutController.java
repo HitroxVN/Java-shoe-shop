@@ -45,7 +45,7 @@ public class CheckoutController extends HttpServlet {
         request.setAttribute("totalAmount", totalAmount);
         request.setAttribute("userId", userId);
         
-        request.getRequestDispatcher("/views/checkout/checkout.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/users/checkout/checkout.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

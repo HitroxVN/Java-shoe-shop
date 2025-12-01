@@ -50,7 +50,7 @@ public class UserOrderController extends HttpServlet {
         OrderDAO orderDao = new OrderDAO();
         List<Orders> orders = orderDao.getOrdersByUser(userId); // Lấy danh sách đơn hàng của user
         request.setAttribute("orders", orders);
-        request.getRequestDispatcher("/views/user_orders.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/users/orders/user_orders.jsp").forward(request, response);
     }
 
     private void showOrderDetail(HttpServletRequest request, HttpServletResponse response, int userId)
@@ -94,7 +94,7 @@ public class UserOrderController extends HttpServlet {
 
         request.setAttribute("items", items);
         request.setAttribute("orderId", orderId);
-        request.getRequestDispatcher("/views/user_order_items.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/users/orders/user_order_items.jsp").forward(request, response);
     }
 
 

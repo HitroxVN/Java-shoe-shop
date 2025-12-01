@@ -74,7 +74,7 @@ public class HomeController extends HttpServlet {
 		request.setAttribute("categories", categories);
 		request.setAttribute("selectedCategoryId", categoryId);
 
-		request.getRequestDispatcher("views/home/products.jsp").forward(request, response);
+		request.getRequestDispatcher("views/users/home/products.jsp").forward(request, response);
 	}
 
 	private void showProductDetail(HttpServletRequest request, HttpServletResponse response)
@@ -89,7 +89,7 @@ public class HomeController extends HttpServlet {
 			}
 
 			request.setAttribute("product", product);
-			request.getRequestDispatcher("views/home/detail.jsp").forward(request, response);
+			request.getRequestDispatcher("views/users/home/detail.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			response.sendRedirect("home");

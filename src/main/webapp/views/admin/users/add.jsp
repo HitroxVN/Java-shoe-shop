@@ -27,7 +27,6 @@
 		
 		Loại tài khoản: <select name="role">
 			<option value="customer" <c:if test="${inputAdd.role == 'customer' }">selected</c:if>>Khách hàng</option>
-			<option value="staff" <c:if test="${inputAdd.role == 'staff' }">selected</c:if>>Nhân viên</option>
 			<option value="admin" <c:if test="${inputAdd.role == 'admin' }">selected</c:if>>Admin</option>
 		</select>
 		<c:if test="${not empty loi.loiRole }">${loi.loiRole }</c:if><br>

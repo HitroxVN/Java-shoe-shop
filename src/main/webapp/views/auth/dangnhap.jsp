@@ -20,6 +20,7 @@
         Nhập mật khẩu: <input type="password" name="password"><br>
         <button type="submit">Đăng nhập</button>
     </form>
-
+    <a href="dangky">Đăng ký tài khoản</a><br>
+	<a href="home">Trở về trang chủ</a>
 </body>
 </html>

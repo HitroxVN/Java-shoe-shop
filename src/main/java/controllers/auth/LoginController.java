@@ -82,8 +82,8 @@ public class LoginController extends HttpServlet {
 		}
 //		forward sang trang home
 //		response.sendRedirect("index.jsp");
-		request.getRequestDispatcher("/views/home/products.jsp").forward(request, response);
-//		response.sendRedirect(request.getContextPath() + "/home");
+//		request.getRequestDispatcher("/views/home/products.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/home");
 	}
 
 }

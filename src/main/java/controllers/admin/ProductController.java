@@ -110,14 +110,14 @@ public class ProductController extends HttpServlet {
 
 		request.setAttribute("listProducts", listProducts);
 		request.setAttribute("listCategories", listCategories);
-		request.getRequestDispatcher("views/product/list.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/product/list.jsp").forward(request, response);
 	}
 
 	private void showAddForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<Categories> listCategories = categoryDao.getAll();
 		request.setAttribute("listCategories", listCategories);
-		request.getRequestDispatcher("views/product/add.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/product/add.jsp").forward(request, response);
 	}
 
 	private void addProduct(HttpServletRequest request, HttpServletResponse response)
@@ -154,7 +154,7 @@ public class ProductController extends HttpServlet {
 				request.setAttribute("product", product);
 				List<Categories> listCategories = categoryDao.getAll();
 				request.setAttribute("listCategories", listCategories);
-				request.getRequestDispatcher("views/product/add.jsp").forward(request, response);
+				request.getRequestDispatcher("views/admin/product/add.jsp").forward(request, response);
 				return;
 			}
 
@@ -180,7 +180,7 @@ public class ProductController extends HttpServlet {
 
 		request.setAttribute("product", product);
 		request.setAttribute("listCategories", listCategories);
-		request.getRequestDispatcher("views/product/edit.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/product/edit.jsp").forward(request, response);
 	}
 
 	private void updateProduct(HttpServletRequest request, HttpServletResponse response)
@@ -222,7 +222,7 @@ public class ProductController extends HttpServlet {
 				request.setAttribute("product", product);
 				List<Categories> listCategories = categoryDao.getAll();
 				request.setAttribute("listCategories", listCategories);
-				request.getRequestDispatcher("views/product/edit.jsp").forward(request, response);
+				request.getRequestDispatcher("views/admin/product/edit.jsp").forward(request, response);
 				return;
 			}
 
@@ -271,7 +271,7 @@ public class ProductController extends HttpServlet {
 		request.setAttribute("listCategories", listCategories);
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("selectedCategoryId", categoryId);
-		request.getRequestDispatcher("views/product/list.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/product/list.jsp").forward(request, response);
 	}
 
 	// Hàm upload file

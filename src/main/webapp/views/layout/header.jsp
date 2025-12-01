@@ -24,13 +24,13 @@
 			</div>
 			<div class="inner-list">
 				<ul>
-					<li><a href="#">sản phẩm</a></li>
-					<li><a href="#">tài khoản</a></li>
-					<li><a href="#">đơn hàng</a></li>
+					<li><a href="../ProductController">sản phẩm</a></li>
+					<li><a href="../admin/users">tài khoản</a></li>
+					<li><a href="../OrderController">đơn hàng</a></li>
 				</ul>
 			</div>
 			<div class="inner-auth">
-				<a href="#">Login</a>
+				<a href="../admin">Trang quản lý</a>
 			</div>
 		</div>
 	</header>

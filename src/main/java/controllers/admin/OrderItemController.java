@@ -43,7 +43,7 @@ public class OrderItemController extends HttpServlet {
 
             request.setAttribute("items", items);
             request.setAttribute("orderId", orderId); // để hiển thị orderId nếu muốn
-            request.getRequestDispatcher("views/order_items.jsp").forward(request, response);
+            request.getRequestDispatcher("views/admin/orders/order_items.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();

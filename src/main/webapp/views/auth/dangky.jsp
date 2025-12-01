@@ -18,5 +18,7 @@
         Nhập lại mật khẩu <input type="password" name="repassword"><br>
         <button type="submit">Đăng ký</button>
     </form>
+    <a href="dangnhap">Đăng nhập ngay</a><br>
+    <a href="home">Trở về trang chủ</a>
 </body>
 </html>

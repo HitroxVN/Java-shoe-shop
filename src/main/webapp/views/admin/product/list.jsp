@@ -100,7 +100,8 @@
 </table>
 
 <div style="margin-top: 20px;">
-    <a href="CategoryController" class="btn btn-primary">Quản lý loại sản phẩm</a>
+    <a href="CategoryController" class="btn btn-primary">Quản lý loại sản phẩm (danh mục)</a><br>
+    <a href="admin">Trang quản lý</a>
 </div>
 </body>
 </html>

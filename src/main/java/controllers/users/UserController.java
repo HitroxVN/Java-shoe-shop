@@ -57,7 +57,7 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
 		Users session = (Users) request.getSession().getAttribute("user");
 		request.setAttribute("user", session);
-		request.getRequestDispatcher("views/user/index.jsp").forward(request, response);
+		request.getRequestDispatcher("views/users/user/index.jsp").forward(request, response);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class UserController extends HttpServlet {
 		if(validate != null && !validate.isEmpty()) {
 			request.setAttribute("loi", validate);
 			request.setAttribute("inputAdd", u);
-			request.getRequestDispatcher("views/user/index.jsp").forward(request, response);
+			request.getRequestDispatcher("views/users/user/index.jsp").forward(request, response);
 			return;
 		}
 		
@@ -95,7 +95,7 @@ public class UserController extends HttpServlet {
 		if(!email.equals(session.getEmail()) && authDao.checkEmail(email)) {
 			request.setAttribute("loiEmail", "Email đã tồn tại.");
 			request.setAttribute("inputAdd", u);
-			request.getRequestDispatcher("views/user/index.jsp").forward(request, response);
+			request.getRequestDispatcher("views/users/user/index.jsp").forward(request, response);
 			return;
 		}
 		

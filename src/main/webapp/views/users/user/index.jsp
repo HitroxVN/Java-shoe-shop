@@ -29,6 +29,7 @@
 		
 		<button type="submit">Cập nhập</button>
 	</form>
-	<a href="logout"> Đăng xuất</a>
+	<a href="logout"> Đăng xuất</a><br>
+	<a href="home">Trở về trang chủ</a>
 </body>
 </html>

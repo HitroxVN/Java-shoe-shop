@@ -38,24 +38,18 @@ public class OrderController extends HttpServlet {
         }
     }
 
-    // ==========================
     // Hiển thị tất cả đơn hàng
-    // ==========================
     private void listOrders(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         OrderDAO dao = new OrderDAO();
         List<Orders> list = dao.getAllOrders();
 
-        System.out.println("Số đơn hàng lấy được: " + list.size());
-
         request.setAttribute("orders", list);
-        request.getRequestDispatcher("/views/order_list.jsp").forward(request, response);
+        request.getRequestDispatcher("views/admin/orders/order_list.jsp").forward(request, response);
     }
 
-    // ==========================
     // Xác nhận đơn hàng
-    // ==========================
     private void confirmOrder(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

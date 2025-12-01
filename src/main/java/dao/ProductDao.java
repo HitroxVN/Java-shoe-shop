@@ -11,26 +11,8 @@ import java.util.List;
 import db.Dbconnection;
 import models.Products;
 
-public class ProductDao {
-	// Helper method để map ResultSet -> Product
-	private Products mapProduct(ResultSet rs) throws SQLException {
-		Products p = new Products();
-		p.setId(rs.getInt("id"));
-		p.setCategory_id(rs.getInt("category_id"));
-		p.setName(rs.getString("name"));
-		p.setDescription(rs.getString("description"));
-		p.setPrice(rs.getDouble("price"));
-		p.setImage(rs.getString("image"));
-		p.setSize(rs.getString("size"));
-		p.setStock(rs.getInt("stock"));
-		try {
-			p.setCategoryName(rs.getString("category_name"));
-		} catch (SQLException e) {
-			// Không có category_name
-		}
-		return p;
-	}
-
+public class ProductDao extends DAO {
+	
 	// Lấy tất cả sản phẩm
 	public List<Products> getAll() {
 		List<Products> list = new ArrayList<>();

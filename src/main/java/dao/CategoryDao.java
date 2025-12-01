@@ -32,32 +32,33 @@ public class CategoryDao {
 		}
 		return categories;
 	}
-	// tìm kiếm danh mục 
-		public List<Categories> getSearch(String search) {
-			List<Categories> categories = new ArrayList<>();
-			String sql = "SELECT * FROM categories where name LIKE ?";
 
-			try {
-				Connection c = Dbconnection.getConnection();
-				
-				PreparedStatement st = c.prepareStatement(sql);
-				st.setString(1, "%"+search+"%");
-				
-				ResultSet rs = st.executeQuery();
-				
-				while (rs.next()) {
-					Categories category = new Categories();
-					category.setId(rs.getInt("id"));
-					category.setName(rs.getString("name"));
-					categories.add(category);
-				}
-				
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+	// tìm kiếm danh mục
+	public List<Categories> getSearch(String search) {
+		List<Categories> categories = new ArrayList<>();
+		String sql = "SELECT * FROM categories where name LIKE ?";
+
+		try (Connection c = Dbconnection.getConnection();
+			PreparedStatement st = c.prepareStatement(sql)) {
 			
-			return categories;
+			st.setString(1, "%" + search + "%");
+
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				Categories category = new Categories();
+				category.setId(rs.getInt("id"));
+				category.setName(rs.getString("name"));
+				categories.add(category);
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
+
+		return categories;
+	}
+
 	// Lấy loại sản phẩm theo ID
 	public Categories getCategoryById(int id) {
 		Categories category = null;

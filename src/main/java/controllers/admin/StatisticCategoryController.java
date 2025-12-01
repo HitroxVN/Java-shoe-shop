@@ -36,7 +36,7 @@ private StatisticDAO  statisticDAO;
 		List<CategoryStatistic> listLittle = statisticDAO.thuongHieuTonThap();
 		req.setAttribute("thuonHieuIt", listLittle);
 		
-		RequestDispatcher rq = req.getRequestDispatcher("/views/statistic_categories.jsp");
+		RequestDispatcher rq = req.getRequestDispatcher("/views/admin/stats/statistic_categories.jsp");
 		rq.forward(req, resp);
 	}
 

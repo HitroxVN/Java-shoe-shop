@@ -37,7 +37,7 @@ private StatisticDAO  statisticDAO;
 			
 			req.setAttribute("status", map);
 			
-			RequestDispatcher rq = req.getRequestDispatcher("/views/statistic_order.jsp");
+			RequestDispatcher rq = req.getRequestDispatcher("/views/admin/stats/statistic_order.jsp");
 			rq.forward(req, resp);
 		}
 }

@@ -27,7 +27,7 @@
     	<a href="login">Đăng nhập</a>
     </c:if>
    	<c:if test="${not empty user }">
-   		 <a href="thongtin">${user.full_name }</a><br>
+   		 <a href="thongtin">${empty user.full_name ? 'Tài khoản của tôi' : user.full_name}</a><br>
    		 <a href="cart">Giỏ hàng</a><br>
    		 <a href="UserOrderController">Đơn hàng của tôi</a><br>
    	</c:if>

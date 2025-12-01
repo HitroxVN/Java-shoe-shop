@@ -94,12 +94,12 @@ public class CategoryController extends HttpServlet {
 			throws ServletException, IOException {
 		List<Categories> listCategories = categoryDao.getAll();
 		request.setAttribute("listCategories", listCategories);
-		request.getRequestDispatcher("views/category/list.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/category/list.jsp").forward(request, response);
 	}
 
 	private void showAddForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("views/category/add.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/category/add.jsp").forward(request, response);
 	}
 	private void searchCategories(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -117,8 +117,10 @@ public class CategoryController extends HttpServlet {
 		request.setAttribute("listCategories", listCategories);
 		request.setAttribute("keyword", keyword);
 
-		request.getRequestDispatcher("views/category/list.jsp").forward(request, response);
-	}	private void addCategory(HttpServletRequest request, HttpServletResponse response)
+		request.getRequestDispatcher("views/admin/category/list.jsp").forward(request, response);
+	}	
+	
+	private void addCategory(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String name = request.getParameter("name");
 
@@ -129,7 +131,7 @@ public class CategoryController extends HttpServlet {
 		if (!errors.isEmpty()) {
 			request.setAttribute("errors", errors);
 			request.setAttribute("category", category);
-			request.getRequestDispatcher("views/category/add.jsp").forward(request, response);
+			request.getRequestDispatcher("views/admin/category/add.jsp").forward(request, response);
 			return;
 		}
 
@@ -148,7 +150,7 @@ public class CategoryController extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Categories category = categoryDao.getCategoryById(id);
 		request.setAttribute("category", category);
-		request.getRequestDispatcher("views/category/edit.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/category/edit.jsp").forward(request, response);
 	}
 
 	private void updateCategory(HttpServletRequest request, HttpServletResponse response)
@@ -163,7 +165,7 @@ public class CategoryController extends HttpServlet {
 		if (!errors.isEmpty()) {
 			request.setAttribute("errors", errors);
 			request.setAttribute("category", category);
-			request.getRequestDispatcher("views/category/edit.jsp").forward(request, response);
+			request.getRequestDispatcher("views/admin/category/edit.jsp").forward(request, response);
 			return;
 		}
 
@@ -171,7 +173,7 @@ public class CategoryController extends HttpServlet {
 		if (categoryDao.existsByNameExcludingId(name, id)) {
 			request.setAttribute("error", "Tên danh mục đã tồn tại. Vui lòng chọn tên khác.");
 			request.setAttribute("category", category);
-			request.getRequestDispatcher("views/category/edit.jsp").forward(request, response);
+			request.getRequestDispatcher("views/admin/category/edit.jsp").forward(request, response);
 			return;
 		}
 

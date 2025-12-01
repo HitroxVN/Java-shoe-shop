@@ -28,7 +28,7 @@ public class CartController extends HttpServlet {
         List<Carts> cartList = cartDao.getCartByUserId(uid);
 
         request.setAttribute("cartList", cartList);
-        request.getRequestDispatcher("/views/cart/cart.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/users/cart/cart.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

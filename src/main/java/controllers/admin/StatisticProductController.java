@@ -44,7 +44,7 @@ private StatisticDAO  statisticDAO;
 			List<Products> listProductLittle = statisticDAO.sanPhamTonThap();
 			req.setAttribute("sanPhamIt", listProductLittle);
 			
-			RequestDispatcher rq = req.getRequestDispatcher("/views/statistic_product.jsp");
+			RequestDispatcher rq = req.getRequestDispatcher("/views/admin/stats/statistic_product.jsp");
 			rq.forward(req, resp);
 			
 		}

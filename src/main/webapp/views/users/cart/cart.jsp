@@ -56,6 +56,9 @@
 <h3>Tổng tiền: <%= total %> VNĐ</h3>
 
 <form action="checkout" method="get">
-    <input type="hidden" name="userId" value="1" />
+    <input type="hidden" name="userId" value="${sessionScope.user.id}" />
     <input type="submit" value="Thanh toán" style="padding:10px 16px;background:#4CAF50;color:#fff;border:none;border-radius:4px;cursor:pointer;" />
 </form>
+
+<br>
+	<a href="home">Trở về trang chủ</a>

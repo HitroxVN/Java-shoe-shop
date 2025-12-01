@@ -37,7 +37,7 @@ public class StatisticHomeController extends HttpServlet {
 		//tổng số tài khoản
 		req.setAttribute("tongSoTaiKhoan", statisticDAO.tongTaiKhoan());
 		
-		RequestDispatcher rq = req.getRequestDispatcher("/views/statistic_home.jsp");
+		RequestDispatcher rq = req.getRequestDispatcher("/views/admin/stats/statistic_home.jsp");
 		rq.forward(req, resp);
 		
 	}

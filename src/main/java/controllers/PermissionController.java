@@ -54,16 +54,8 @@ public class PermissionController implements Filter {
 				return;
 			}
 		}
-
         
-        // trang nhân viên
-        if (path.startsWith("/staff") || path.startsWith("/nhanvien")) {
-            if (user == null || !( "staff".equals(user.getRole()) || "admin".equals(user.getRole()) )) {
-                res.sendRedirect(req.getContextPath() + "/home");
-                return;
-            }
-        }
-        
+		// chặn truy cập trang null session
         if(path.startsWith("/users") || path.startsWith("/thongtin") || path.startsWith("/cart")) {
         	if(user == null) {
         		res.sendRedirect(req.getContextPath() + "/login");

@@ -19,12 +19,13 @@
 
 <label>Lọc theo role</label>
 	<form action="${pageContext.request.contextPath}/admin/users" method="get">
-		<input type="hidden" name="action" value="role_filter">
-		<select name="role">
-			<option value="customer">Khách hàng</option>
-			<option value="staff">Nhân viên</option>
-			<option value="admin">Quản lý</option>
+		<input type="hidden" name="action" value="role_filter"> <select name="role">
+			<option value="customer"
+				${param.role == 'customer' ? 'selected' : ''}>Khách hàng</option>
+			<option value="admin" ${param.role == 'admin' ? 'selected' : ''}>Quản
+				lý</option>
 		</select>
+
 		<button type="submit">Lọc</button>
 	</form>
 	
@@ -59,7 +60,6 @@
 					<th>
 					<c:choose>
 						<c:when test="${u.role == 'customer'}">Khách hàng</c:when>
-						<c:when test="${u.role == 'staff'}">Nhân viên</c:when>
 						<c:when test="${u.role == 'admin'}">Quản lý</c:when>
 					</c:choose>
 					</th>
@@ -74,5 +74,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<a href="../admin">Trang quản lý</a>
 </body>
 </html>

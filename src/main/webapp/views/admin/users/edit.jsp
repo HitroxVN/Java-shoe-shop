@@ -25,7 +25,6 @@
 		
         Loại tài khoản: <select name="role">
 			<option value="customer" <c:if test="${inputEdit.role == 'customer'}">selected</c:if> >Khách hàng</option>
-			<option value="staff" <c:if test="${inputEdit.role == 'staff'}">selected</c:if>>Nhân viên</option>
 			<option value="admin" <c:if test="${inputEdit.role == 'admin'}">selected</c:if>>Quản lý</option>
 		</select><br>
 		<button type="submit">Cập nhập</button>
